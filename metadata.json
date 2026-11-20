@@ -1,0 +1,6 @@
+{
+  "name": "Proxy Wars",
+  "description": "Fast-paced social deduction party game where players spot the AI Glitch among human responses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

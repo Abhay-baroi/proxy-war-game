@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Proxy Wars 3D Neural Stage</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #070B14;
+      touch-action: none;
+      user-select: none;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    #stage {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+    .hud-chip {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #94A3B8;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+  <div id="hud-mode" class="hud-chip">3D NEURAL CORE</div>
+
+  <script type="module">
+    const canvas = document.getElementById('stage');
+    const hudMode = document.getElementById('hud-mode');
+
+    const STAGE_THEMES = {
+      OPENING:     { primary: 0x06B6D4, accent: 0xEC4899, speed: 1.35, label: '3D NEURAL CORE • READY' },
+      LOBBY:       { primary: 0x22D3EE, accent: 0x38BDF8, speed: 0.85, label: 'LOBBY BEACON • SYNCED' },
+      ROLE_REVEAL: { primary: 0xF59E0B, accent: 0xEC4899, speed: 1.9,  label: 'PLAY STARTING • ASSIGNING' },
+      GLITCH:      { primary: 0xEC4899, accent: 0xF43F5E, speed: 2.35, label: 'GLITCH SIGNATURE DETECTED' },
+      HUMAN:       { primary: 0x06B6D4, accent: 0x10B981, speed: 1.0,  label: 'HUMAN VERIFIED NODE' },
+      VOTE:        { primary: 0xF43F5E, accent: 0xF59E0B, speed: 2.1,  label: 'ELIMINATION LOCK ACTIVE' },
+      REVEAL:      { primary: 0x10B981, accent: 0x22D3EE, speed: 1.5,  label: 'IDENTITY TELEMETRY' }
+    };
+
+    let activeThemeKey = 'OPENING';
+    let targetPrimaryHex = STAGE_THEMES.OPENING.primary;
+    let targetAccentHex = STAGE_THEMES.OPENING.accent;
+    let targetSpeed = STAGE_THEMES.OPENING.speed;
+
+    let dragRotX = 0.22;
+    let dragRotY = 0.0;
+    let targetRotX = 0.22;
+    let targetRotY = 0.0;
+    let isDragging = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    canvas.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      targetRotY += dx * 0.009;
+      targetRotX = Math.max(-0.45, Math.min(0.65, targetRotX + dy * 0.006));
+    });
+    window.addEventListener('pointerup', () => { isDragging = false; });
+    window.addEventListener('pointercancel', () => { isDragging = false; });
+
+    window.setStageMode = function(modeKey) {
+      const t = STAGE_THEMES[modeKey] || STAGE_THEMES.OPENING;
+      activeThemeKey = modeKey;
+      targetPrimaryHex = t.primary;
+      targetAccentHex = t.accent;
+      targetSpeed = t.speed;
+      hudMode.textContent = t.label;
+    };
+
+    function createProceduralGridTextures() {
+      const c = document.createElement('canvas');
+      c.width = 256;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#0B1220';
+      ctx.fillRect(0, 0, 256, 256);
+      ctx.strokeStyle = 'rgba(34, 211, 238, 0.22)';
+      ctx.lineWidth = 2;
+      for (let i = 0; i <= 256; i += 32) {
+        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 256); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(256, i); ctx.stroke();
+      }
+      ctx.fillStyle = 'rgba(236, 72, 153, 0.35)';
+      ctx.fillRect(124, 124, 8, 8);
+      return c;
+    }
+
+    function createRadialShadowCanvas() {
+      const c = document.createElement('canvas');
+      c.width = 128;
+      c.height = 128;
+      const ctx = c.getContext('2d');
+      const g = ctx.createRadialGradient(64, 64, 6, 64, 64, 62);
+      g.addColorStop(0, 'rgba(0, 0, 0, 0.72)');
+      g.addColorStop(0.55, 'rgba(0, 0, 0, 0.28)');
+      g.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 128, 128);
+      return c;
+    }
+
+    async function bootThreeJs() {
+      const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');
+      const { RoomEnvironment } = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/environments/RoomEnvironment.js');
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight, false);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x070B14);
+      scene.fog = new THREE.FogExp2(0x070B14, 0.095);
+
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+      const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 60);
+      camera.position.set(0, 1.85, 5.4);
+      camera.lookAt(0, 0.9, 0);
+
+      // Studio PBR Lighting: warm key + cool fill hemisphere + rim point light
+      const hemiLight = new THREE.HemisphereLight(0x38BDF8, 0x090D18, 0.85);
+      scene.add(hemiLight);
+
+      const keyLight = new THREE.DirectionalLight(0xFFF3E0, 2.2);
+      keyLight.position.set(3.5, 5.5, 4.0);
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.set(1024, 1024);
+      keyLight.shadow.camera.near = 1;
+      keyLight.shadow.camera.far = 16;
+      keyLight.shadow.camera.left = -3.5;
+      keyLight.shadow.camera.right = 3.5;
+      keyLight.shadow.camera.top = 3.5;
+      keyLight.shadow.camera.bottom = -3.5;
+      scene.add(keyLight);
+
+      const accentLight = new THREE.PointLight(0xEC4899, 2.4, 12);
+      accentLight.position.set(-2.5, 2.0, 2.5);
+      scene.add(accentLight);
+
+      // Ground disc with procedural CanvasTexture bump/roughness + contact shadow
+      const gridCanvas = createProceduralGridTextures();
+      const gridTex = new THREE.CanvasTexture(gridCanvas);
+      gridTex.wrapS = THREE.RepeatWrapping;
+      gridTex.wrapT = THREE.RepeatWrapping;
+      gridTex.repeat.set(6, 6);
+
+      const floorGeo = new THREE.CircleGeometry(9, 64);
+      const floorMat = new THREE.MeshStandardMaterial({
+        map: gridTex,
+        bumpMap: gridTex,
+        bumpScale: 0.025,
+        roughness: 0.58,
+        metalness: 0.35
+      });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      const shadowTex = new THREE.CanvasTexture(createRadialShadowCanvas());
+      const contactShadow = new THREE.Mesh(
+        new THREE.PlaneGeometry(2.8, 2.8),
+        new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })
+      );
+      contactShadow.rotation.x = -Math.PI / 2;
+      contactShadow.position.y = 0.01;
+      scene.add(contactShadow);
+
+      // Composite 9-Part Procedural Hero Model ("Proxy Sentinel Core"), bottom-centered at y=0
+      const heroGroup = new THREE.Group();
+      scene.add(heroGroup);
+
+      const obsidianMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.35, metalness: 0.85 });
+      const chromeMat = new THREE.MeshStandardMaterial({ color: 0xCBD5E1, roughness: 0.18, metalness: 0.95 });
+      const primaryGlowMat = new THREE.MeshStandardMaterial({
+        color: 0x06B6D4, emissive: 0x06B6D4, emissiveIntensity: 1.4, roughness: 0.2, metalness: 0.6
+      });
+      const accentGlowMat = new THREE.MeshStandardMaterial({
+        color: 0xEC4899, emissive: 0xEC4899, emissiveIntensity: 1.6, roughness: 0.25, metalness: 0.55
+      });
+      const crystalCoreMat = new THREE.MeshPhysicalMaterial({
+        color: 0x22D3EE, emissive: 0x0E7490, emissiveIntensity: 0.75,
+        roughness: 0.08, metalness: 0.15, clearcoat: 1.0, clearcoatRoughness: 0.08
+      });
+
+      // Part 1 & 2: Two-tier octagonal pedestal base flush with ground y=0
+      const baseLower = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.25, 0.20, 8), obsidianMat);
+      baseLower.position.y = 0.10;
+      baseLower.castShadow = true;
+      baseLower.receiveShadow = true;
+      heroGroup.add(baseLower);
+
+      const baseTrim = new THREE.Mesh(new THREE.TorusGeometry(0.95, 0.032, 12, 32), primaryGlowMat);
+      baseTrim.rotation.x = Math.PI / 2;
+      baseTrim.position.y = 0.21;
+      heroGroup.add(baseTrim);
+
+      // Part 3: LatheGeometry tapered emitter column
+      const lathePts = [
+        new THREE.Vector2(0.0, 0.20),
+        new THREE.Vector2(0.58, 0.22),
+        new THREE.Vector2(0.32, 0.44),
+        new THREE.Vector2(0.42, 0.56),
+        new THREE.Vector2(0.0, 0.58)
+      ];
+      const emitterCol = new THREE.Mesh(new THREE.LatheGeometry(lathePts, 24), chromeMat);
+      emitterCol.castShadow = true;
+      heroGroup.add(emitterCol);
+
+      // Part 4 & 5: Faceted Neural Core + inner wireframe lattice
+      const coreGroup = new THREE.Group();
+      coreGroup.position.y = 1.28;
+      heroGroup.add(coreGroup);
+
+      const neuralCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.46, 0), crystalCoreMat);
+      neuralCore.castShadow = true;
+      coreGroup.add(neuralCore);
+
+      const coreCage = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(0.62, 1),
+        new THREE.MeshBasicMaterial({ color: 0x38BDF8, wireframe: true, transparent: true, opacity: 0.48 })
+      );
+      coreGroup.add(coreCage);
+
+      // Part 6 & 7: Dual Gimbal Calibration Rings
+      const outerRing = new THREE.Mesh(new THREE.TorusGeometry(0.96, 0.04, 14, 48), primaryGlowMat);
+      outerRing.castShadow = true;
+      coreGroup.add(outerRing);
+
+      const innerRing = new THREE.Mesh(new THREE.TorusGeometry(0.76, 0.028, 12, 48), accentGlowMat);
+      coreGroup.add(innerRing);
+
+      // Part 8: 3 Orbiting Data-Shard Pylons
+      const pylonGroup = new THREE.Group();
+      coreGroup.add(pylonGroup);
+      for (let i = 0; i < 3; i++) {
+        const angle = (i / 3) * Math.PI * 2;
+        const pylon = new THREE.Mesh(new THREE.OctahedronGeometry(0.11, 0), chromeMat);
+        pylon.position.set(Math.cos(angle) * 1.24, Math.sin(angle * 2) * 0.14, Math.sin(angle) * 1.24);
+        pylon.castShadow = true;
+        pylonGroup.add(pylon);
+      }
+
+      // Part 9: InstancedMesh orbital particle motes (48 items)
+      const moteCount = 48;
+      const moteGeo = new THREE.BoxGeometry(0.045, 0.045, 0.045);
+      const moteMat = new THREE.MeshStandardMaterial({ color: 0x38BDF8, emissive: 0x22D3EE, emissiveIntensity: 1.5 });
+      const motes = new THREE.InstancedMesh(moteGeo, moteMat, moteCount);
+      scene.add(motes);
+
+      const moteSeeds = Array.from({ length: moteCount }, (_, i) => ({
+        radius: 1.45 + (i % 5) * 0.34,
+        speed: 0.4 + (i % 7) * 0.12,
+        yBase: 0.3 + ((i * 37) % 100) / 55.0,
+        phase: i * 0.65
+      }));
+
+      const scratchMatrix = new THREE.Matrix4();
+      const scratchPos = new THREE.Vector3();
+      const scratchQuat = new THREE.Quaternion();
+      const scratchScale = new THREE.Vector3(1, 1, 1);
+      const scratchEuler = new THREE.Euler();
+      const colorPrimary = new THREE.Color(targetPrimaryHex);
+      const colorAccent = new THREE.Color(targetAccentHex);
+      const tgtP = new THREE.Color();
+      const tgtA = new THREE.Color();
+
+      let currentSpeed = targetSpeed;
+      let prevTime = performance.now();
+
+      function resize() {
+        const w = window.innerWidth;
+        const h = Math.max(1, window.innerHeight);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h, false);
+      }
+      window.addEventListener('resize', resize);
+
+      function animate(now) {
+        requestAnimationFrame(animate);
+        const dt = Math.min(0.05, (now - prevTime) * 0.001);
+        prevTime = now;
+        const damp = 1 - Math.exp(-7.5 * dt);
+
+        if (!isDragging) {
+          targetRotY += dt * 0.28 * currentSpeed;
+        }
+        dragRotX += (targetRotX - dragRotX) * damp;
+        dragRotY += (targetRotY - dragRotY) * damp;
+        currentSpeed += (targetSpeed - currentSpeed) * damp;
+
+        tgtP.setHex(targetPrimaryHex);
+        tgtA.setHex(targetAccentHex);
+        colorPrimary.lerp(tgtP, damp);
+        colorAccent.lerp(tgtA, damp);
+
+        primaryGlowMat.color.copy(colorPrimary);
+        primaryGlowMat.emissive.copy(colorPrimary);
+        accentGlowMat.color.copy(colorAccent);
+        accentGlowMat.emissive.copy(colorAccent);
+        crystalCoreMat.color.copy(colorPrimary);
+        crystalCoreMat.emissive.copy(colorAccent).multiplyScalar(0.45);
+        coreCage.material.color.copy(colorPrimary);
+        moteMat.color.copy(colorPrimary);
+        moteMat.emissive.copy(colorAccent);
+        accentLight.color.copy(colorAccent);
+
+        const tSec = now * 0.001;
+        heroGroup.rotation.y = dragRotY;
+        heroGroup.rotation.x = dragRotX * 0.35;
+        coreGroup.position.y = 1.28 + Math.sin(tSec * 2.1) * 0.07;
+
+        neuralCore.rotation.y += dt * 0.9 * currentSpeed;
+        neuralCore.rotation.x += dt * 0.45 * currentSpeed;
+        coreCage.rotation.y -= dt * 0.55 * currentSpeed;
+        outerRing.rotation.x = Math.sin(tSec * 0.8) * 0.65;
+        outerRing.rotation.y += dt * 1.15 * currentSpeed;
+        innerRing.rotation.y -= dt * 1.45 * currentSpeed;
+        innerRing.rotation.z = Math.cos(tSec * 1.1) * 0.7;
+        pylonGroup.rotation.y += dt * 0.85 * currentSpeed;
+
+        for (let i = 0; i < moteCount; i++) {
+          const s = moteSeeds[i];
+          const a = tSec * s.speed * currentSpeed + s.phase;
+          scratchPos.set(
+            Math.cos(a) * s.radius,
+            s.yBase + Math.sin(tSec * 1.8 + s.phase) * 0.14,
+            Math.sin(a) * s.radius
+          );
+          scratchEuler.set(a, a * 0.7, 0);
+          scratchQuat.setFromEuler(scratchEuler);
+          scratchMatrix.compose(scratchPos, scratchQuat, scratchScale);
+          motes.setMatrixAt(i, scratchMatrix);
+        }
+        motes.instanceMatrix.needsUpdate = true;
+
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function bootCanvasFallback() {
+      // Offline resilient 3D wireframe projection fallback if CDN is blocked
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const verts = [
+        [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+        [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]
+      ];
+      const edges = [
+        [0,1],[1,2],[2,3],[3,0],
+        [4,5],[5,6],[6,7],[7,4],
+        [0,4],[1,5],[2,6],[3,7]
+      ];
+      let prev = performance.now();
+      function frame(now) {
+        requestAnimationFrame(frame);
+        const dt = Math.min(0.05, (now - prev) * 0.001);
+        prev = now;
+        const w = canvas.width = window.innerWidth;
+        const h = canvas.height = window.innerHeight;
+        if (!isDragging) targetRotY += dt * 0.7 * targetSpeed;
+        dragRotX += (targetRotX - dragRotX) * (1 - Math.exp(-7 * dt));
+        dragRotY += (targetRotY - dragRotY) * (1 - Math.exp(-7 * dt));
+
+        ctx.fillStyle = '#070B14';
+        ctx.fillRect(0, 0, w, h);
+
+        const cx = w * 0.5, cy = h * 0.5;
+        const scale = Math.min(w, h) * 0.22;
+        const proj = verts.map(([x, y, z]) => {
+          const rx = x * Math.cos(dragRotY) - z * Math.sin(dragRotY);
+          const rz = x * Math.sin(dragRotY) + z * Math.cos(dragRotY);
+          const ry = y * Math.cos(dragRotX) - rz * Math.sin(dragRotX);
+          const fz = y * Math.sin(dragRotX) + rz * Math.cos(dragRotX) + 3.4;
+          return [cx + (rx / fz) * scale * 2.2, cy + (ry / fz) * scale * 2.2];
+        });
+
+        ctx.strokeStyle = activeThemeKey === 'GLITCH' || activeThemeKey === 'VOTE' ? '#EC4899' : '#22D3EE';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        edges.forEach(([a, b]) => {
+          ctx.moveTo(proj[a][0], proj[a][1]);
+          ctx.lineTo(proj[b][0], proj[b][1]);
+        });
+        ctx.stroke();
+      }
+      requestAnimationFrame(frame);
+    }
+
+    bootThreeJs().catch(() => bootCanvasFallback());
+  </script>
+</body>
+</html>

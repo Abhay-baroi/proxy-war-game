@@ -1,0 +1,552 @@
+[
+  {
+    "id": "p_lectures_01",
+    "category": "Lectures & Labs",
+    "prompt": "Why were you 20 minutes late to the 9:00 AM Physics lecture?",
+    "aiLines": [
+      "I encountered unexpected traffic delays due to road optimization protocols.",
+      "My sleep cycle was improperly configured, resulting in alarm malfunction.",
+      "I prioritized purchasing a hot beverage to maintain cognitive awareness.",
+      "Navigation routing directed me through a suboptimal pedestrian corridor."
+    ]
+  },
+  {
+    "id": "p_projects_02",
+    "category": "Group Projects",
+    "prompt": "What did you actually contribute to the group presentation slides?",
+    "aiLines": [
+      "I reviewed the overall formatting to ensure optimal visual consistency.",
+      "My primary role was moral support and synthesizing team perspectives.",
+      "I generated the concluding slide to summarize our comprehensive research.",
+      "I standardized the bullet typography and aligned the transition timings."
+    ]
+  },
+  {
+    "id": "p_canteen_03",
+    "category": "Canteen & Breaks",
+    "prompt": "Explain why the cafeteria food tastes weird today.",
+    "aiLines": [
+      "The culinary staff utilized alternative seasonings to diversify the menu.",
+      "Ingredients may have exceeded their peak freshness parameters slightly.",
+      "The heating elements likely operated at variable temperature thresholds.",
+      "A bold experimental fusion of regional spices was deployed this afternoon."
+    ]
+  },
+  {
+    "id": "p_tech_04",
+    "category": "Wi-Fi & Tech",
+    "prompt": "What is your excuse for disconnecting during the online quiz?",
+    "aiLines": [
+      "The localized wireless network experienced an unannounced packet loss event.",
+      "My hardware device initiated an involuntary operating system update.",
+      "Signal interference disrupted my authentication handshake with the server.",
+      "A sudden thermal throttling cycle forced my browser session to terminate."
+    ]
+  },
+  {
+    "id": "p_exams_05",
+    "category": "Exams & Grading",
+    "prompt": "How are you planning to pass the midterms after skipping every class?",
+    "aiLines": [
+      "I will execute an intensive overnight study algorithm covering key concepts.",
+      "By leveraging peer summary documentation and high-probability topics.",
+      "I rely on my foundational knowledge base and logical deduction capabilities.",
+      "Through strategic pattern recognition across historical examination papers."
+    ]
+  },
+  {
+    "id": "p_hostel_06",
+    "category": "Hostel & Commute",
+    "prompt": "What is making that suspicious noise in your dorm room late at night?",
+    "aiLines": [
+      "It is simply the thermal expansion of the building's structural pipes.",
+      "My electronic cooling fans are operating at maximum rotation speed.",
+      "I was reorganizing my storage containers to optimize room utility.",
+      "Acoustic resonance from the neighboring ventilation shaft amplifies footsteps."
+    ]
+  },
+  {
+    "id": "p_lectures_07",
+    "category": "Lectures & Labs",
+    "prompt": "The professor just called on you while you were zoning out. What do you say?",
+    "aiLines": [
+      "Could you reiterate the core premise so I can align my analytical framework?",
+      "I believe the answer depends heavily on the underlying boundary conditions.",
+      "That is an intriguing question that merits examining both primary variables.",
+      "Yes, the empirical evidence strongly supports the secondary hypothesis."
+    ]
+  },
+  {
+    "id": "p_lectures_08",
+    "category": "Lectures & Labs",
+    "prompt": "Why did your lab experiment produce purple smoke instead of clear liquid?",
+    "aiLines": [
+      "A trace impurity catalyzed an unanticipated chromatic phase transition.",
+      "I calibrated the reagent ratios using an aggressive approximation method.",
+      "Ambient humidity altered the thermodynamic equilibrium inside the beaker.",
+      "The calibration weights on the digital scale had a minor offset error."
+    ]
+  },
+  {
+    "id": "p_lectures_09",
+    "category": "Lectures & Labs",
+    "prompt": "Why are you sitting in the very back row wearing sunglasses?",
+    "aiLines": [
+      "Fluorescent overhead fixtures induce acute optic fatigue during morning hours.",
+      "I am conducting a low-profile observation of the lecture delivery style.",
+      "My corrective eyewear suffered an unfortunate hinge failure this morning.",
+      "Minimizing visual stimuli enhances my auditory information retention."
+    ]
+  },
+  {
+    "id": "p_lectures_10",
+    "category": "Lectures & Labs",
+    "prompt": "Your attendance is currently at 42%. Pitch your case to the dean.",
+    "aiLines": [
+      "My physical absence was offset by rigorous asynchronous curriculum mastery.",
+      "Personal health optimization required strategic rest on early weekdays.",
+      "I experienced recurring transit scheduling conflicts beyond my control.",
+      "Independent study yielded superior comprehension per hour invested."
+    ]
+  },
+  {
+    "id": "p_projects_11",
+    "category": "Group Projects",
+    "prompt": "Why did you push broken code to main 5 minutes before the demo?",
+    "aiLines": [
+      "I attempted a final micro-optimization that introduced a syntax anomaly.",
+      "The module passed all localized validation checks on my personal machine.",
+      "A merge conflict silently deprecated a critical dependency reference.",
+      "Rapid deployment velocity occasionally incurs temporary stability tradeoffs."
+    ]
+  },
+  {
+    "id": "p_projects_12",
+    "category": "Group Projects",
+    "prompt": "You haven't replied to the group chat in 4 days. What's your opening line?",
+    "aiLines": [
+      "Apologies for the latency; my notification queue was temporarily muted.",
+      "Hello team, I have been conducting deep offline research on our deliverables.",
+      "My mobile transceiver was undergoing urgent battery recalibration.",
+      "Great progress everyone, please assign me any remaining miscellaneous tasks."
+    ]
+  },
+  {
+    "id": "p_projects_13",
+    "category": "Group Projects",
+    "prompt": "Why does your section of the report sound completely different from the rest?",
+    "aiLines": [
+      "I adopted a more formal academic register to elevate scholarly rigor.",
+      "My writing style naturally prioritizes precision and structured clarity.",
+      "I synthesized multiple peer-reviewed abstracts into a concise narrative.",
+      "Varied authorial voices demonstrate authentic collaborative diversity."
+    ]
+  },
+  {
+    "id": "p_projects_14",
+    "category": "Group Projects",
+    "prompt": "What happens if the live prototype crashes during the judge Q&A?",
+    "aiLines": [
+      "We pivot seamlessly to our pre-recorded architecture walkthrough slides.",
+      "I will explain that the system entered a protective fail-safe state.",
+      "We frame the interruption as an authentic stress-test demonstration.",
+      "By initiating a manual restart while discussing future scalability goals."
+    ]
+  },
+  {
+    "id": "p_canteen_15",
+    "category": "Canteen & Breaks",
+    "prompt": "Why are you buying three iced coffees at 4:30 PM?",
+    "aiLines": [
+      "I am constructing a sustained caffeine buffer for tonight's coding sprint.",
+      "Two units are designated for teammates experiencing low energy metrics.",
+      "Bulk acquisition maximizes value relative to the single-cup pricing tier.",
+      "My circadian rhythm operates on an inverted productivity schedule."
+    ]
+  },
+  {
+    "id": "p_canteen_16",
+    "category": "Canteen & Breaks",
+    "prompt": "Someone took the last samosa right in front of you. How do you react?",
+    "aiLines": [
+      "I acknowledge their superior reaction velocity and select an alternative snack.",
+      "I maintain polite composure while internally recalculating lunch options.",
+      "I casually inquire whether the adjacent tray is scheduled for replenishment.",
+      "Disappointment is mitigated by pivoting toward available pastry inventory."
+    ]
+  },
+  {
+    "id": "p_canteen_17",
+    "category": "Canteen & Breaks",
+    "prompt": "What is the weirdest snack combo you eat during finals week?",
+    "aiLines": [
+      "Crunchy corn chips paired with warm chocolate-flavored spread for calories.",
+      "Instant noodles enhanced with sliced cheddar and crushed salted crackers.",
+      "Cold leftover pizza dipped into sweetened condensed milk beverage.",
+      "Plain white rice combined with spicy chili sauce and toasted peanuts."
+    ]
+  },
+  {
+    "id": "p_canteen_18",
+    "category": "Canteen & Breaks",
+    "prompt": "Why is the line at the campus coffee cart 40 people long today?",
+    "aiLines": [
+      "An unscheduled mid-morning break coincided with two exiting lecture halls.",
+      "The espresso extraction unit is operating below standard throughput.",
+      "Promotional seasonal syrup availability has triggered elevated demand.",
+      "Collective sleep deprivation across the student body has reached peak levels."
+    ]
+  },
+  {
+    "id": "p_tech_19",
+    "category": "Wi-Fi & Tech",
+    "prompt": "Why does campus Wi-Fi always die right when you hit Submit?",
+    "aiLines": [
+      "Concurrent upload bursts saturate the hallway access point bandwidth.",
+      "Dynamic IP lease renewals frequently collide with deadline timestamps.",
+      "Concrete lecture walls severely attenuate 5GHz wireless signal propagation.",
+      "Packet prioritization throttles non-cached portal requests during peak load."
+    ]
+  },
+  {
+    "id": "p_tech_20",
+    "category": "Wi-Fi & Tech",
+    "prompt": "Why do you have 94 browser tabs open on your laptop?",
+    "aiLines": [
+      "Each tab represents an active research vector I intend to revisit shortly.",
+      "Closing unarchived references creates anxiety regarding lost source links.",
+      "Modern RAM allocation handles dormant background processes efficiently.",
+      "It functions as a chronological visual bookmarking system for my week."
+    ]
+  },
+  {
+    "id": "p_tech_21",
+    "category": "Wi-Fi & Tech",
+    "prompt": "Your phone alarm went off at full volume during a silent exam. What happened?",
+    "aiLines": [
+      "A secondary recurring reminder bypassed the system Do Not Disturb profile.",
+      "I mistakenly toggled media volume rather than the primary alarm channel.",
+      "A calendar event triggered an auditory alert despite airplane mode.",
+      "Hardware button friction inside my pocket restored full acoustic output."
+    ]
+  },
+  {
+    "id": "p_tech_22",
+    "category": "Wi-Fi & Tech",
+    "prompt": "Why is your laptop fan sounding like a jet engine right now?",
+    "aiLines": [
+      "Dust accumulation on the heat sink is reducing thermal dissipation efficiency.",
+      "An unoptimized background compiler process is utilizing all CPU cores.",
+      "High ambient room temperature requires elevated fan RPM curves.",
+      "Multiple heavyweight IDE instances are competing for system memory."
+    ]
+  },
+  {
+    "id": "p_exams_23",
+    "category": "Exams & Grading",
+    "prompt": "You see Question 1 on the exam and recognize literally zero words. First thought?",
+    "aiLines": [
+      "Scan subsequent pages immediately to locate familiar foundational concepts.",
+      "Verify that the printed examination booklet matches my enrolled course code.",
+      "Initiate calm breathing exercises to restore cognitive recall pathways.",
+      "Draft partial definitions for adjacent keywords to capture partial credit."
+    ]
+  },
+  {
+    "id": "p_exams_24",
+    "category": "Exams & Grading",
+    "prompt": "Why did you bring a graphing calculator to an Ethics exam?",
+    "aiLines": [
+      "Habitual packing protocols ensured all standard exam gear was included.",
+      "I anticipated quantitative utilitarian cost-benefit calculations might appear.",
+      "Tactile familiarity with the device provides subtle psychological comfort.",
+      "It serves as an emergency backup timepiece if wall clocks are obscured."
+    ]
+  },
+  {
+    "id": "p_exams_25",
+    "category": "Exams & Grading",
+    "prompt": "What do you write when the essay asks for 500 words and you know 40?",
+    "aiLines": [
+      "Expand core definitions using illustrative hypothetical scenarios and context.",
+      "Introduce relevant historical background before summarizing key implications.",
+      "Restate the central thesis through complementary analytical perspectives.",
+      "Provide structured comparisons that highlight nuanced boundary conditions."
+    ]
+  },
+  {
+    "id": "p_exams_26",
+    "category": "Exams & Grading",
+    "prompt": "How do you celebrate surviving a brutal 3-hour final exam?",
+    "aiLines": [
+      "By acquiring a substantial comfort meal and initiating an extended nap.",
+      "Immediately deleting temporary flashcards and decompressing with friends.",
+      "Taking a slow outdoor walk to recalibrate after prolonged indoor focus.",
+      "Avoiding post-exam answer comparisons to preserve emotional equilibrium."
+    ]
+  },
+  {
+    "id": "p_hostel_27",
+    "category": "Hostel & Commute",
+    "prompt": "Why is the hallway microwave always sticky?",
+    "aiLines": [
+      "Users frequently neglect covering high-moisture dishes during rapid heating.",
+      "High shared utilization exceeds the scheduled custodial maintenance cycle.",
+      "Sugar-dense sauces vaporize and condense along the interior walls.",
+      "Insufficient paper towel availability discourages immediate post-use wiping."
+    ]
+  },
+  {
+    "id": "p_hostel_28",
+    "category": "Hostel & Commute",
+    "prompt": "What is the number one unwritten rule of surviving campus roommates?",
+    "aiLines": [
+      "Always utilize headphones for audio playback after designated quiet hours.",
+      "Establish explicit boundaries regarding shared refrigerator shelf allocation.",
+      "Communicate overnight guest schedules well in advance via text message.",
+      "Maintain consistent dishwashing cadence to prevent sink congestion."
+    ]
+  },
+  {
+    "id": "p_hostel_29",
+    "category": "Hostel & Commute",
+    "prompt": "Why did you sprint across campus in flip-flops this morning?",
+    "aiLines": [
+      "Minimizing departure delay outweighed optimal footwear selection.",
+      "Time-to-classroom constraints required immediate high-velocity transit.",
+      "My primary sneakers were still drying following yesterday's rainstorm.",
+      "I underestimated the walking duration from the outer dormitory block."
+    ]
+  },
+  {
+    "id": "p_hostel_30",
+    "category": "Hostel & Commute",
+    "prompt": "Why are there 6 empty water bottles lined up on your desk?",
+    "aiLines": [
+      "I batch-collect recyclables before making a consolidated trip to the bin.",
+      "Visual tracking helps ensure I meet daily hydration targets while studying.",
+      "Reusing containers for chilled tap water reduces frequent hallway walks.",
+      "Desk organization was deprioritized during an intense assignment deadline."
+    ]
+  },
+  {
+    "id": "p_clubs_31",
+    "category": "Campus Clubs",
+    "prompt": "Why did you actually join the Robotics Club?",
+    "aiLines": [
+      "Access to fabrication hardware and complimentary pizza during orientation.",
+      "To gain hands-on embedded systems experience alongside senior mentors.",
+      "Networking with motivated peers interested in autonomous hardware builds.",
+      "Adding tangible interdisciplinary engineering projects to my portfolio."
+    ]
+  },
+  {
+    "id": "p_clubs_32",
+    "category": "Campus Clubs",
+    "prompt": "What happens at a campus hackathon at 3:00 AM?",
+    "aiLines": [
+      "Teams debate pivoting core features while consuming excessive energy drinks.",
+      "Debugging obscure API errors becomes indistinguishable from comedy.",
+      "Half the participants nap on beanbags while UI polish accelerates.",
+      "Unexpected hardware glitches force creative last-minute workarounds."
+    ]
+  },
+  {
+    "id": "p_clubs_33",
+    "category": "Campus Clubs",
+    "prompt": "Why is the student club booth giving away neon stickers?",
+    "aiLines": [
+      "Low-cost tactile merchandise drives initial foot traffic and brand recall.",
+      "Laptop decal visibility serves as organic peer-to-peer campus marketing.",
+      "Sticker distribution lowers social friction for starting signup conversations.",
+      "Visual incentives effectively attract passersby between scheduled classes."
+    ]
+  },
+  {
+    "id": "p_clubs_34",
+    "category": "Campus Clubs",
+    "prompt": "What is the hardest part of organizing a campus fest?",
+    "aiLines": [
+      "Coordinating venue permits and audio logistics across multiple departments.",
+      "Balancing sponsorship budgets against last-minute vendor price changes.",
+      "Maintaining volunteer attendance during peak mid-semester deadlines.",
+      "Synchronizing stage schedules when guest speakers experience travel delays."
+    ]
+  },
+  {
+    "id": "p_career_35",
+    "category": "Internships & Placements",
+    "prompt": "Recruiter asks: 'What is your biggest weakness?' Give a bold answer.",
+    "aiLines": [
+      "I sometimes over-engineer edge cases before validating the minimum scope.",
+      "I tend to dive deeply into documentation when learning unfamiliar stacks.",
+      "Delegating tasks can be challenging when I care deeply about code quality.",
+      "I occasionally spend excessive time refining minor interface micro-details."
+    ]
+  },
+  {
+    "id": "p_career_36",
+    "category": "Internships & Placements",
+    "prompt": "Why are you wearing a full suit in 95-degree campus weather?",
+    "aiLines": [
+      "Formal attire expectations for today's corporate interview panel apply.",
+      "Professional presentation remains important despite suboptimal climate conditions.",
+      "I am transitioning directly from a career fair booth to an assessment.",
+      "Indoor interview rooms maintain aggressive air conditioning temperatures."
+    ]
+  },
+  {
+    "id": "p_career_37",
+    "category": "Internships & Placements",
+    "prompt": "What do you secretly do during a 2-hour career info session?",
+    "aiLines": [
+      "Silently research compensation bands and employee reviews on my phone.",
+      "Monitor the catering table to gauge when boxed refreshments open.",
+      "Draft tailored LinkedIn connection messages for the visiting engineers.",
+      "Complete minor overdue assignments while nodding attentively at slides."
+    ]
+  },
+  {
+    "id": "p_career_38",
+    "category": "Internships & Placements",
+    "prompt": "Your interviewer asks you to invert a binary tree on a tiny napkin. Go.",
+    "aiLines": [
+      "First, clarify null node edge cases, then swap left and right recursively.",
+      "I would request a standard whiteboard or sketch an iterative BFS queue.",
+      "Confirm whether in-place mutation is preferred over returning a new root.",
+      "Trace a three-node base case carefully before scaling to deeper subtrees."
+    ]
+  },
+  {
+    "id": "p_library_39",
+    "category": "Library & Study Spots",
+    "prompt": "Someone is loudly crunching chips on the silent 4th floor. Your move?",
+    "aiLines": [
+      "Insert active noise-cancelling earbuds and relocate to a corner carrel.",
+      "Deliver a brief, unmistakable glance to signal acoustic awareness.",
+      "Focus intensely on my notes until the snack container is depleted.",
+      "Politely gesture toward the designated quiet zone signage nearby."
+    ]
+  },
+  {
+    "id": "p_library_40",
+    "category": "Library & Study Spots",
+    "prompt": "Why did you leave your backpack on a library chair for 3 hours?",
+    "aiLines": [
+      "I intended a brief lunch break that expanded due to unexpected queues.",
+      "Reserving proximity to the sole functioning power outlet was essential.",
+      "An impromptu advisor meeting delayed my planned return to the desk.",
+      "Transporting heavy textbooks across campus between short errands is tiring."
+    ]
+  },
+  {
+    "id": "p_library_41",
+    "category": "Library & Study Spots",
+    "prompt": "What is the best spot on campus to take an uninterrupted nap?",
+    "aiLines": [
+      "The upper mezzanine armchairs behind the quiet architecture periodicals.",
+      "A shaded lawn bench near the botanical garden away from main walkways.",
+      "An empty seminar room on the third floor during mid-afternoon gaps.",
+      "The cushioned alcove beside the rarely visited basement archive stacks."
+    ]
+  },
+  {
+    "id": "p_library_42",
+    "category": "Library & Study Spots",
+    "prompt": "Why are there zero open power outlets anywhere in the student union?",
+    "aiLines": [
+      "Modern students carry multiple power-hungry devices requiring simultaneous charge.",
+      "Legacy architectural wiring predates ubiquitous laptop adoption on campus.",
+      "Several wall receptacles have tripped circuit breakers or loose contacts.",
+      "High dwell times during break windows keep outlet-adjacent seats occupied."
+    ]
+  },
+  {
+    "id": "p_social_43",
+    "category": "Campus Life",
+    "prompt": "You wave back at someone who was actually waving at the person behind you. Recover.",
+    "aiLines": [
+      "Smoothly transition the raised hand into adjusting my hair or collar.",
+      "Maintain a friendly smile and continue walking at a steady pace.",
+      "Convert the gesture into stretching my shoulder to mask the misread.",
+      "Acknowledge the humorous coincidence and laugh it off naturally."
+    ]
+  },
+  {
+    "id": "p_social_44",
+    "category": "Campus Life",
+    "prompt": "Why did you tell everyone you 'totally started' the term paper last week?",
+    "aiLines": [
+      "Creating the blank document with a formatted title page counts as initiating.",
+      "Social desirability bias encourages projecting proactive academic habits.",
+      "I mentally outlined the primary arguments while commuting on Tuesday.",
+      "Downloading three relevant PDFs constitutes substantive preliminary progress."
+    ]
+  },
+  {
+    "id": "p_social_45",
+    "category": "Campus Life",
+    "prompt": "What is the real reason everyone suddenly becomes polite during peer evaluations?",
+    "aiLines": [
+      "Mutual awareness that grading rubrics incorporate reciprocal teammate feedback.",
+      "End-of-semester fatigue encourages harmonious resolution of minor friction.",
+      "Strategic diplomacy maximizes shared bonus points across the whole group.",
+      "Nobody wants awkward hallway encounters during the following semester."
+    ]
+  },
+  {
+    "id": "p_social_46",
+    "category": "Campus Life",
+    "prompt": "You have 12 minutes between classes on opposite ends of campus. Strategy?",
+    "aiLines": [
+      "Utilize campus shortcut stairwells and exit lectures near the rear doors.",
+      "Borrow a shared micro-mobility scooter to compress transit time by half.",
+      "Maintain a brisk power-walk while hydrating and reviewing upcoming slides.",
+      "Accept a two-minute buffer and message the teaching assistant in advance."
+    ]
+  },
+  {
+    "id": "p_tech_47",
+    "category": "Wi-Fi & Tech",
+    "prompt": "Why did your screen share reveal 14 meme tabs during the class presentation?",
+    "aiLines": [
+      "I shared the entire desktop window instead of isolating the slide deck.",
+      "Cultural research for an unrelated elective remained open in that browser.",
+      "Keyboard shortcut misfire switched workspaces right before clicking Present.",
+      "Browser session restoration reopened yesterday's leisure tabs automatically."
+    ]
+  },
+  {
+    "id": "p_canteen_48",
+    "category": "Canteen & Breaks",
+    "prompt": "What is the true currency of campus life?",
+    "aiLines": [
+      "Reliable high-speed Wi-Fi paired with accessible charging ports and iced coffee.",
+      "Clean lecture notes shared five minutes before a surprise pop quiz.",
+      "Leftover catering platters from adjacent department faculty seminars.",
+      "A trustworthy teammate who formats citations accurately at midnight."
+    ]
+  },
+  {
+    "id": "p_exams_49",
+    "category": "Exams & Grading",
+    "prompt": "The professor says 'This won't be on the exam.' How much do you trust that?",
+    "aiLines": [
+      "Treat the statement with cautious skepticism and skim the notes anyway.",
+      "Zero percent; it frequently appears as a bonus question on page four.",
+      "I allocate five minutes to reviewing the core formula just in case.",
+      "Historically, disclaimers correlate strongly with tricky multiple-choice items."
+    ]
+  },
+  {
+    "id": "p_hostel_50",
+    "category": "Hostel & Commute",
+    "prompt": "It's raining sideways and you forgot an umbrella. How do you get to class?",
+    "aiLines": [
+      "Use a laminated course folder as a makeshift rain shield while sprinting.",
+      "Navigate exclusively via interconnected indoor breezeways and tunnels.",
+      "Wait ten minutes under the portico hoping the downpour subsides slightly.",
+      "Accept inevitable dampness and prioritize keeping my laptop backpack dry."
+    ]
+  }
+]
